@@ -2,13 +2,16 @@ import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from "../repositories/fakes/FakeUsersRepository";
 import CreateUserService from "./CreateUserService";
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 
 //categoria
 describe('CreateUser', () => {
   it('should be able to create a new user', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
+    const fakeHashPrivder = new FakeHashProvider();
+
     const createUser = new CreateUserService(
-      fakeUsersRepository,
+      fakeUsersRepository, fakeHashPrivder
     );
 
     const user = await createUser.execute({
@@ -22,8 +25,10 @@ describe('CreateUser', () => {
 
   it('should not be able to create anew user with same email from another', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
+    const fakeHashPrivder = new FakeHashProvider();
+
     const createUser = new CreateUserService(
-      fakeUsersRepository,
+      fakeUsersRepository, fakeHashPrivder
     );
 
     await createUser.execute({
