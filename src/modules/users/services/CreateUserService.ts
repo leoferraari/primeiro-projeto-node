@@ -5,7 +5,6 @@ import User from '../infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-import { getWeekYearWithOptions } from 'date-fns/fp';
 
 interface IRequest {
     name: string,

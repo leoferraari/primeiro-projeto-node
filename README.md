@@ -2,6 +2,7 @@
 
 ** RF **
 - O usuário deve poder recuperar sua senha informando seu e-mail;
+  - Foi criado o service primeiramente (SendForgotPasswordEmailService) e posteriormente o service de teste;
 - O usuário deve receber um e-mail com instruçoes de recuperação de senha;
 - O Usuário deve poder resetar sua senha;
 
@@ -59,3 +60,14 @@
 - O usuário não pode agendar em um horário já ocupado;
 - O usuário não pode agendar em horário que já passou;
 - O usuário não pode agendar serviços consigo mesmo;
+
+
+
+
+
+-
+
+
+
+
+
