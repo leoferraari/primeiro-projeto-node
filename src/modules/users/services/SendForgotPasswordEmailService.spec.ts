@@ -21,8 +21,6 @@ describe('SendForgotPasswordEmail', () => {
       fakeMailProvider,
       fakeUserTokensRepository
     );
-
-
   });
 
   it('should be able to recover the password using the email', async () => {
