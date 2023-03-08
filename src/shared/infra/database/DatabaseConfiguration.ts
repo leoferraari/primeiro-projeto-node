@@ -1,3 +1,6 @@
+import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
+import User from '@modules/users/infra/typeorm/entities/User';
+import UserToken from '@modules/users/infra/typeorm/entities/UserToken';
 import { DataSource } from 'typeorm';
 import CreateAppointments1641517464789 from '../typeorm/migrations/1641517464789-CreateAppointments';
 import CreateUsers1641574375630 from '../typeorm/migrations/1641574375630-CreateUsers';
@@ -58,6 +61,9 @@ class DatabaseConfiguration {
         CreateUserTokens1677714927705,
       ],
       entities: [
+        User,
+        Appointment,
+        UserToken,
         "src/modules/appointments/infra/typeorm/entities/*.ts",
         "src/modules/users/infra/typeorm/entities/*.ts"
       ],

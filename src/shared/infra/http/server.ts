@@ -7,7 +7,7 @@ import routes from '@shared/infra/http/routes';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 
-import '@shared/infra/typeorm';
+// import '@shared/infra/typeorm';
 import '@shared/container';
 
 import DatabaseConfiguration from '@shared/infra/database/DatabaseConfiguration';
@@ -17,7 +17,7 @@ DatabaseConfiguration.startConnection();
 const app = express();
 
 app.use(express.json());
-// app.use('/files', express.static(uploadConfig.directory));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 //depois das rotas
