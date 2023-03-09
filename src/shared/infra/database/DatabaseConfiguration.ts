@@ -8,6 +8,8 @@ import { AlterProviderFieldToProviderId1641577463071 } from '../typeorm/migratio
 import AddAvatarFieldToUsers1641595847449 from '../typeorm/migrations/1641595847449-AddAvatarFieldToUsers';
 import CreateUserTokens1677714927705 from '../typeorm/migrations/1677714927705-CreateUserTokens';
 
+const path = require('path');
+
 class DatabaseConfiguration {
   private static INSTANCE: DatabaseConfiguration;
 
@@ -64,10 +66,14 @@ class DatabaseConfiguration {
         User,
         Appointment,
         UserToken,
-        "src/modules/appointments/infra/typeorm/entities/*.ts",
-        "src/modules/users/infra/typeorm/entities/*.ts"
+        path.resolve("src", "modules", "**", "infra", "typeorm", "entities", "*.ts"),
+        // "src/modules/appointments/infra/typeorm/entities/*.ts",
+        // "src/modules/users/infra/typeorm/entities/*.ts"
       ],
     });
+    console.log('AAA' + path.resolve("src", "modules", "users", "infra", "typeorm", "entities", "User.ts"));
+    // console.log('AAA' + path.resolve("src", "modules", "**", "infra", "typeorm", "entities", "*.ts"));
+    // console.log('AAA' + path.resolve("..", "..", "..", "..", "src", "modules", "**", "infra", "typeorm", "entities", "*.ts"));
   }
 }
 
