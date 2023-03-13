@@ -6,10 +6,10 @@ import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensReposi
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import ResetPasswordService from './ResetPasswordService';
 
-  let fakeUsersRepository: FakeUsersRepository;
-  let fakeUserTokensRepository: FakeUserTokensRepository;
-  let fakeHashProvider: FakeHashProvider;
-  let resetPassword: ResetPasswordService;
+let fakeUsersRepository: FakeUsersRepository;
+let fakeUserTokensRepository: FakeUserTokensRepository;
+let fakeHashProvider: FakeHashProvider;
+let resetPassword: ResetPasswordService;
 
 describe('ResetPasswordService', () => {
   beforeEach(() => {
@@ -44,12 +44,12 @@ describe('ResetPasswordService', () => {
 
     const updateUser = await fakeUsersRepository.findById(user.id);
 
-    expect(generateHash).toHaveBeenCalledWith('123123');
-    expect(updateUser ?.password).toBe('123123');
+    await expect(generateHash).toHaveBeenCalledWith('123123');
+    await expect(updateUser?.password).toBe('123123');
   });
 
   it('should not be able to reset the password with non-existing token', async () => {
-    await expect (
+    await expect(
       resetPassword.execute({
         token: 'non-existing-token',
         password: '123456',
@@ -60,7 +60,7 @@ describe('ResetPasswordService', () => {
   it('should not be able to reset the password with non-existing user', async () => {
     const { token } = await fakeUserTokensRepository.generate('non-existing-user');
 
-    await expect (
+    await expect(
       resetPassword.execute({
         token,
         password: '123456',

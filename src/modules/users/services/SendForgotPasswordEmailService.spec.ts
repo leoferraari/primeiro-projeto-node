@@ -5,10 +5,10 @@ import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensReposi
 import SendForgotPasswrodEmailService from './SendForgotPasswordEmailService';
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
 
-  let fakeUsersRepository: FakeUsersRepository;
-  let fakeUserTokensRepository: FakeUserTokensRepository;
-  let fakeMailProvider: FakeMailProvider;
-  let sendForgotPasswordEmail: SendForgotPasswordEmailService;
+let fakeUsersRepository: FakeUsersRepository;
+let fakeUserTokensRepository: FakeUserTokensRepository;
+let fakeMailProvider: FakeMailProvider;
+let sendForgotPasswordEmail: SendForgotPasswordEmailService;
 
 describe('SendForgotPasswordEmail', () => {
   beforeEach(() => {
@@ -36,7 +36,7 @@ describe('SendForgotPasswordEmail', () => {
       email: 'leonardo.ferrari@unidavi.edu.br',
     });
 
-    expect(sendMail).toHaveBeenCalled();
+    await expect(sendMail).toHaveBeenCalled();
   });
 
   it('should not be able to recover a non-existing user password', async () => {
@@ -60,7 +60,7 @@ describe('SendForgotPasswordEmail', () => {
       email: 'leonardo.ferrari@unidavi.edu.br',
     });
 
-    expect(generateToken).toHaveBeenCalledWith(user.id);
+    await expect(generateToken).toHaveBeenCalledWith(user.id);
   });
 
 

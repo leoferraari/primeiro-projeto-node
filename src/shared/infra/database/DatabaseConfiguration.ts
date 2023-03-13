@@ -66,14 +66,36 @@ class DatabaseConfiguration {
         User,
         Appointment,
         UserToken,
-        path.resolve("src", "modules", "**", "infra", "typeorm", "entities", "*.ts"),
-        // "src/modules/appointments/infra/typeorm/entities/*.ts",
-        // "src/modules/users/infra/typeorm/entities/*.ts"
+        // path.resolve(
+        //   __dirname,
+        //   '..',
+        //   '..',
+        //   '..',
+        //   'modules',
+        //   '**',
+        //   'infra',
+        //   'typeorm',
+        //   'entities',
+        //   '*.ts',
+        // )
       ],
     });
-    console.log('AAA' + path.resolve("src", "modules", "users", "infra", "typeorm", "entities", "User.ts"));
-    // console.log('AAA' + path.resolve("src", "modules", "**", "infra", "typeorm", "entities", "*.ts"));
-    // console.log('AAA' + path.resolve("..", "..", "..", "..", "src", "modules", "**", "infra", "typeorm", "entities", "*.ts"));
+
+    // console.log('Caminho a fazer ' + path.resolve(
+    //   __dirname,
+    //   '..',
+    //   '..',
+    //   '..',
+    //   'modules',
+    //   '**',
+    //   'infra',
+    //   'typeorm',
+    //   'entities',
+    //   '*.ts',
+    // ));
+
+    // console.log('Caminho Atual ' + __dirname);
+
   }
 }
 

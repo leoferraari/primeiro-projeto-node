@@ -41,8 +41,8 @@ class SendForgotPasswordEmailService {
       'forgot_password.hbs',
     );
 
-    console.log('Teste forgotPasswordTemplate: ' + forgotPasswordTemplate);
-    console.log('Teste dirname: ' + __dirname);
+    // console.log('Caminho Atual: ' + __dirname);
+    // console.log('Teste forgotPasswordTemplate: ' + forgotPasswordTemplate);
 
 
     await this.mailProvider.sendMail({
