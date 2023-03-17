@@ -1,11 +1,11 @@
+import { injectable, inject } from 'tsyringe';
+import '@shared/container';
+import AppError from '@shared/errors/AppError';
+
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
-import { injectable, inject } from 'tsyringe';
-
-import AppError from '@shared/errors/AppError';
 import User from '@modules/users/infra/typeorm/entities/User';
-import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-
 
 interface IRequest {
   user_id: string;
@@ -16,12 +16,12 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateProfile {
+class UpdateProfileService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('IHashProvider')
+    @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) { }
 
@@ -60,9 +60,9 @@ class UpdateProfile {
       user.password = await this.hashProvider.generateHash(password);
     }
 
-    return this.usersRepository.save(user);
+    return await this.usersRepository.save(user);
   }
 
 }
 
-export default UpdateProfile;
+export default UpdateProfileService;
