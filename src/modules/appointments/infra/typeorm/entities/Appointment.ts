@@ -11,26 +11,35 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('appointments') //Decorator que é utilizado como uma função. A classe é um parâmetro a ser passado para entidade;
 class Appointment {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    provider_id: string;
+  @Column()
+  provider_id: string;
 
-    //Muitos agendamentos para um usuário.
-    //Em usuários vai ficar OneToMany.
-    @ManyToOne(() => User)
-    @JoinColumn({name: 'provider_id'})
-    provider: User;
+  //Muitos agendamentos para um usuário.
+  //Em usuários vai ficar OneToMany.
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'provider_id' })
+  provider: User;
 
-    @Column('timestamp with time zone')
-    date: Date;
+  @Column()
+  user_id: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+  //Muitos agendamentos para um usuário.
+  //Em usuários vai ficar OneToMany.
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+  @Column('timestamp with time zone')
+  date: Date;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
 
 export default Appointment;

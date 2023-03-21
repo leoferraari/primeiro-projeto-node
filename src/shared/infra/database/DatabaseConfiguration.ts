@@ -7,6 +7,7 @@ import CreateUsers1641574375630 from '../typeorm/migrations/1641574375630-Create
 import { AlterProviderFieldToProviderId1641577463071 } from '../typeorm/migrations/1641577463071-AlterProviderFieldToProviderId';
 import AddAvatarFieldToUsers1641595847449 from '../typeorm/migrations/1641595847449-AddAvatarFieldToUsers';
 import CreateUserTokens1677714927705 from '../typeorm/migrations/1677714927705-CreateUserTokens';
+import AddUserIdToAppoinments1679358423189 from '../typeorm/migrations/1679358423189-AddUserIdToAppoinments';
 
 const path = require('path');
 
@@ -61,6 +62,7 @@ class DatabaseConfiguration {
         AlterProviderFieldToProviderId1641577463071,
         AddAvatarFieldToUsers1641595847449,
         CreateUserTokens1677714927705,
+        AddUserIdToAppoinments1679358423189,
       ],
       entities: [
         User,
