@@ -1,26 +1,21 @@
-import { Repository } from 'typeorm';
-
-import DatabaseConfiguration from '@shared/infra/database/DatabaseConfiguration';
+import { v4 as uuidv4 } from 'uuid';
 
 import INotificationRepository from '@modules/notifications/repositories/INotificationsRepository';
 import ICreateNotificationDTO from '@modules/notifications/dtos/ICreateNotificationDTO';
 
 import Notification from '@modules/notifications/infra/typeorm/entities/Notification';
 
-
 class NotificationsRepository implements INotificationRepository {
+  private notifications: Notification[] = [];
 
-  private ormRepository: Repository<Notification>;
-
-  constructor() {
-    this.ormRepository = DatabaseConfiguration.getDataSourceInstance().getRepository(Notification);
-  }
 
   public async create({ content, recipient_id }: ICreateNotificationDTO): Promise<Notification> {
 
-    const notification = this.ormRepository.create({ content, recipient_id });
+    const notification = new Notification();
 
-    await this.ormRepository.save(notification);
+    Object.assign(notification, { id: uuidv4(), content, recipient_id });
+
+    this.notifications.push(notification);
 
     return notification;
   }

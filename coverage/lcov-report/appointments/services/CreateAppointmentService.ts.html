@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.55% </span>
+                <span class="strong">97.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>56/58</span>
+                <span class='fraction'>68/70</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.55% </span>
+                <span class="strong">97.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>56/58</span>
+                <span class='fraction'>68/70</span>
             </div>
         
             
@@ -121,7 +121,19 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -143,6 +155,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -176,16 +192,25 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { startOfHour, isBefore, getHours } from 'date-fns';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { startOfHour, isBefore, getHours, format } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 &nbsp;
+import AppError from '@shared/errors/AppError';
 &nbsp;
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
-import AppError from '@shared/errors/AppError';
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 &nbsp;
 interface IRequest {
   provider_id: string;
@@ -203,6 +228,9 @@ class CreateAppointmentService {
   constructor(
     @inject('AppointmentsRepository')
     private appointmentsRepository: IAppointmentsRepository,
+&nbsp;
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository
   ) { }
 &nbsp;
   public async execute({ date, provider_id, user_id }: IRequest): Promise&lt;Appointment&gt; {
@@ -213,7 +241,7 @@ class CreateAppointmentService {
     }
 &nbsp;
     if (provider_id == user_id) {
-      throw new AppError('')
+      throw new AppError("You can't create an appointment with yourself.");
     }
 &nbsp;
     if (getHours(appointmentDate) &lt; 8 || getHours(appointmentDate) &gt; 17) {
@@ -223,7 +251,7 @@ class CreateAppointmentService {
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(appointmentDate);
 &nbsp;
     if (findAppointmentInSameDate) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError("You can't create an appointment with yourself.");</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError("You can't create a schedule with the same data..");</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 &nbsp;
     const appointment = await this.appointmentsRepository.create({
@@ -231,6 +259,14 @@ class CreateAppointmentService {
       user_id,
       date: appointmentDate
     });
+&nbsp;
+    const dateFormated = format(appointmentDate, "dd/MM/yyyt 'às' HH:mm");
+&nbsp;
+    await this.notificationsRepository.create({
+      recipient_id: provider_id,
+      content: `Novo agendamento para dia ${dateFormated}`,
+    });
+&nbsp;
 &nbsp;
     return appointment;
   }
@@ -244,7 +280,7 @@ export default CreateAppointmentService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-23T22:34:55.858Z
+                at 2023-03-25T21:05:50.309Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
