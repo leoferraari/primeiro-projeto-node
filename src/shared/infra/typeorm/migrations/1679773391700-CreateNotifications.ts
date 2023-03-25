@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateNotifications1679773391696 implements MigrationInterface {
+export class CreateNotifications1679773391700 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -16,8 +16,6 @@ export class CreateNotifications1679773391696 implements MigrationInterface {
           {
             name: 'recipient_id',
             type: 'uuid',
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
           },
           {
             name: 'content',

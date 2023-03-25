@@ -9,7 +9,7 @@ import { AlterProviderFieldToProviderId1641577463071 } from '../typeorm/migratio
 import AddAvatarFieldToUsers1641595847449 from '../typeorm/migrations/1641595847449-AddAvatarFieldToUsers';
 import CreateUserTokens1677714927705 from '../typeorm/migrations/1677714927705-CreateUserTokens';
 import AddUserIdToAppoinments1679358423189 from '../typeorm/migrations/1679358423189-AddUserIdToAppoinments';
-import { CreateNotifications1679773391696 } from '../typeorm/migrations/1679773391696-CreateNotifications';
+import { CreateNotifications1679773391700 } from '../typeorm/migrations/1679773391700-CreateNotifications';
 
 const path = require('path');
 
@@ -65,7 +65,7 @@ class DatabaseConfiguration {
         AddAvatarFieldToUsers1641595847449,
         CreateUserTokens1677714927705,
         AddUserIdToAppoinments1679358423189,
-        CreateNotifications1679773391696,
+        CreateNotifications1679773391700,
       ],
       entities: [
         User,
