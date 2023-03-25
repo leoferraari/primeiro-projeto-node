@@ -9,7 +9,6 @@ import { AlterProviderFieldToProviderId1641577463071 } from '../typeorm/migratio
 import AddAvatarFieldToUsers1641595847449 from '../typeorm/migrations/1641595847449-AddAvatarFieldToUsers';
 import CreateUserTokens1677714927705 from '../typeorm/migrations/1677714927705-CreateUserTokens';
 import AddUserIdToAppoinments1679358423189 from '../typeorm/migrations/1679358423189-AddUserIdToAppoinments';
-import { CreateNotifications1679773391696 } from '../typeorm/migrations/1679773391696-CreateNotifications';
 
 const path = require('path');
 
@@ -17,9 +16,14 @@ class DatabaseConfiguration {
   private static INSTANCE: DatabaseConfiguration;
 
   private _dataSource: DataSource;
+  private _dataSourceMongo: DataSource;
 
   get dataSource() {
     return this._dataSource;
+  }
+
+  get dataSourceMongo() {
+    return this._dataSourceMongo;
   }
 
   public static getInstance(): DatabaseConfiguration {
@@ -34,6 +38,11 @@ class DatabaseConfiguration {
     return DatabaseConfiguration.getInstance().dataSource;
   }
 
+  public static getDataSourceInstanceMongo(): DataSource {
+    return DatabaseConfiguration.getInstance().dataSource;
+  }
+
+
   public static startConnection(): void {
     DatabaseConfiguration.getDataSourceInstance()
       .initialize()
@@ -42,6 +51,15 @@ class DatabaseConfiguration {
       })
       .catch(err => {
         console.error('Error during Data Source initialization:', err);
+      });
+
+    DatabaseConfiguration.getDataSourceInstanceMongo()
+      .initialize()
+      .then(() => {
+        console.log('Data Source Mongo DB has been initialized!');
+      })
+      .catch(err => {
+        console.error('Error during Data Source MongoDB initialization:', err);
       });
   }
 
@@ -65,13 +83,11 @@ class DatabaseConfiguration {
         AddAvatarFieldToUsers1641595847449,
         CreateUserTokens1677714927705,
         AddUserIdToAppoinments1679358423189,
-        CreateNotifications1679773391696,
       ],
       entities: [
         User,
         Appointment,
         UserToken,
-        Notification,
         // path.resolve(
         //   __dirname,
         //   '..',
@@ -86,8 +102,36 @@ class DatabaseConfiguration {
         // )
       ],
     });
+    // console.log('Caminho a fazer ' + path.resolve(
+    //   __dirname,
+    //   '..',
+    //   '..',
+    //   '..',
+    //   'modules',
+    //   '**',
+    //   'infra',
+    //   'typeorm',
+    //   'entities',
+    //   '*.ts',
+    // ));
+
+    // console.log('Caminho Atual ' + __dirname);
+
+    this._dataSourceMongo = new DataSource({
+      name: "mongo",
+      type: "mongodb",
+      host: "localhost",
+      port: 27017,
+      database: "gobarber",
+      "useUnifiedTopology": true,
+      entities: [
+        Notification
+      ],
+    });
+
   }
 }
+
 export default DatabaseConfiguration;
 
 
