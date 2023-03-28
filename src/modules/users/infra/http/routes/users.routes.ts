@@ -25,6 +25,11 @@ usersRouter.post('/', celebrate({
   },
 }), usersController.create);
 
-usersRouter.patch('/avatar', userAvatarController.update);
+usersRouter.patch(
+  '/avatar',
+  ensureAuthenticated,
+  upload.single('avatar'),
+  userAvatarController.update
+);
 
 export default usersRouter;
