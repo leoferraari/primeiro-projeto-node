@@ -1,0 +1,14 @@
+[2023-04-07 21:04:35:435] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":61,"consumedPoints":6,"isFirstInDuration":false} : 429
+[2023-04-07 21:04:43:443] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":389,"consumedPoints":6,"isFirstInDuration":false} : 429
+[2023-04-07 21:04:44:444] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":201,"consumedPoints":7,"isFirstInDuration":false} : 429
+[2023-04-07 21:04:44:444] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":35,"consumedPoints":8,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:09:79] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":299,"consumedPoints":6,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:09:79] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":272,"consumedPoints":7,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:09:79] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":9,"consumedPoints":8,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:13:713] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":259,"consumedPoints":6,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:13:713] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":248,"consumedPoints":7,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:13:713] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":244,"consumedPoints":8,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:13:713] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":80,"consumedPoints":9,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:13:713] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":57,"consumedPoints":10,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:15:715] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":197,"consumedPoints":6,"isFirstInDuration":false} : 429
+[2023-04-07 21:07:21:721] warn: Too many Requests. {"remainingPoints":0,"msBeforeNext":726,"consumedPoints":6,"isFirstInDuration":false} : 429
